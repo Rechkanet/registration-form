@@ -28,7 +28,7 @@ var path = {
 src: {
   html: 'src/*.html',
   js: 'src/js/registration.js',
-  jquery: 'src/js/jquery-3.2.1.min.js',
+  jquery: 'src/js/jquery-3.3.1.min.js',
   style: 'src/css/registration.css',
   bootstrap: 'src/css/bootstrap.min.css',
   img: 'src/img/**/*.*',
@@ -67,6 +67,17 @@ gulp.task('html:build', function () {
   })
   .pipe(reload({stream: true}));
 });
+
+gulp.task('style:build', function () {
+  gulp.src(path.src.style)
+  .pipe(sass())
+  .pipe(prefixer())
+  .pipe(cssmin())
+  .pipe(suffix({suffix: '.min'}))
+  .pipe(gulp.dest(path.build.css))
+  .pipe(reload({stream: true}));
+});
+
 
 gulp.task('js:build', function () {
   gulp.src(path.src.js)
